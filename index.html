@@ -13,7 +13,7 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background: linear-gradient(135deg, #026599 0%, #014a70 100%);
+            background: transparent;
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -27,7 +27,7 @@
             padding: 40px;
             width: 100%;
             max-width: 600px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
             position: relative;
             overflow: hidden;
         }
@@ -524,9 +524,9 @@
 
 <script>
 // ==========================================
-// CONFIGURATION - REPLACE THIS URL
+// GOOGLE SHEETS CONFIGURATION
 // ==========================================
-const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbyRgLKA7M2AmlqSXn90Mvv76KcacoakUAdk92k3IUQ7cBvAXbomfFz10xaEQ4OXpd8y/exec';
+const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbyx7JcegxgNRvcZygtLqz6367j-lUGt4sjGpH7lST7imhVSjfjXTrzDvx7qefqSpzOt/exec';
 const GOOGLE_API_KEY = 'AIzaSyDt1GGYQ5ug-rlEn9qdAk7rbCEKsjLOeiw';
 
 // Form Data Storage
@@ -633,6 +633,9 @@ function loadGoogleMaps() {
     script.src = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_API_KEY}&libraries=places&callback=initGooglePlaces`;
     script.async = true;
     script.defer = true;
+    script.onerror = function() {
+        console.error('Google Maps failed to load');
+    };
     document.head.appendChild(script);
 }
 
@@ -649,7 +652,8 @@ addressInput.addEventListener('input', function() {
     }
     
     if (!autocompleteService) {
-        initGooglePlaces();
+        console.log('Autocomplete service not ready');
+        return;
     }
     
     autocompleteService.getPlacePredictions({
@@ -825,28 +829,32 @@ function submitForm() {
         ...utmData
     };
     
+    console.log('Submitting to Google Sheets:', submissionData);
     sendToGoogleSheets(submissionData);
 }
 
 function sendToGoogleSheets(data) {
-    const formBody = Object.keys(data).map(key => 
-        encodeURIComponent(key) + '=' + encodeURIComponent(data[key])
-    ).join('&');
+    // Create form data
+    const formData = new URLSearchParams();
+    for (const [key, value] of Object.entries(data)) {
+        formData.append(key, value);
+    }
     
     fetch(GOOGLE_SHEETS_URL, {
         method: 'POST',
+        mode: 'no-cors',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
         },
-        body: formBody
+        body: formData.toString()
     })
-    .then(response => response.text())
-    .then(result => {
-        console.log('Success:', result);
+    .then(() => {
+        console.log('Form submitted successfully');
         window.top.location.href = 'https://refinancehub.com.au/thank-you';
     })
-    .catch(error => {
+    .catch((error) => {
         console.error('Error:', error);
+        // Still redirect even on error
         window.top.location.href = 'https://refinancehub.com.au/thank-you';
     });
 }

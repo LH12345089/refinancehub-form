@@ -493,7 +493,7 @@ let formData = {
 // FIXED: Read UTMs from current URL (passed from Framer via iframe src)
 function captureUTMs() {
     let pageUrl = window.location.href;
-    console.log('Current URL:', pageUrl);
+    console.log('URL:', pageUrl);
     
     let utmParams = new URLSearchParams(window.location.search);
     
@@ -503,6 +503,9 @@ function captureUTMs() {
         document.getElementById(field).value = value;
         console.log(field + ':', value);
     });
+    
+    document.getElementById('page_url').value = pageUrl;
+});
     
     document.getElementById('page_url').value = pageUrl;
 }

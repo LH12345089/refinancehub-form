@@ -503,16 +503,39 @@ let formData = {
     phone: ''
 };
 
-// UTM Capture
+// UTM Capture - FIXED to get from parent URL
 function captureUTMs() {
-    const params = new URLSearchParams(window.location.search);
+    let pageUrl = '';
+    let utmParams = new URLSearchParams();
+    
+    // Try to get URL from parent page (Framer)
+    try {
+        if (window.parent !== window) {
+            // We're in an iframe, try to get referrer or parent location
+            pageUrl = document.referrer || window.parent.location.href;
+        } else {
+            pageUrl = window.location.href;
+        }
+    } catch (e) {
+        // If cross-origin error, use referrer or current URL
+        pageUrl = document.referrer || window.location.href;
+    }
+    
+    console.log('Page URL detected:', pageUrl);
+    
+    // Extract UTM parameters from the URL
+    const urlObj = new URL(pageUrl);
+    utmParams = urlObj.searchParams;
+    
     const fields = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
     fields.forEach(field => {
-        const value = params.get(field) || localStorage.getItem(field) || '';
+        const value = utmParams.get(field) || localStorage.getItem(field) || '';
         document.getElementById(field).value = value;
         if (value) localStorage.setItem(field, value);
+        console.log(field + ':', value);
     });
-    document.getElementById('page_url').value = window.location.href;
+    
+    document.getElementById('page_url').value = pageUrl;
 }
 
 // Slider
@@ -736,13 +759,11 @@ function submitForm() {
         page_url: document.getElementById('page_url').value
     };
     
-    // Send as form data
+    console.log('Submitting data:', data);
+    
     const formBody = Object.keys(data).map(key => 
         encodeURIComponent(key) + '=' + encodeURIComponent(data[key])
     ).join('&');
-    
-    console.log('Sending to:', GOOGLE_SHEETS_URL);
-    console.log('Data:', formBody);
     
     fetch(GOOGLE_SHEETS_URL, {
         method: 'POST',
@@ -751,15 +772,10 @@ function submitForm() {
         },
         body: formBody
     })
-    .then(response => {
-        console.log('Response status:', response.status);
-        return response.text();
-    })
-    .then(result => {
-        console.log('Success:', result);
+    .then(() => {
         window.top.location.href = 'https://refinancehub.com.au/thank-you';
     })
-    .catch(error => {
+    .catch((error) => {
         console.error('Error:', error);
         window.top.location.href = 'https://refinancehub.com.au/thank-you';
     });

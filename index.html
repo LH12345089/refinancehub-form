@@ -5,12 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RefinanceHub - Check Your Rate</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             background: transparent;
@@ -20,7 +15,6 @@
             justify-content: center;
             padding: 20px;
         }
-
         .form-container {
             background: white;
             border-radius: 20px;
@@ -31,7 +25,6 @@
             position: relative;
             overflow: hidden;
         }
-
         .progress-bar {
             height: 6px;
             background: #e5e7eb;
@@ -39,46 +32,31 @@
             margin-bottom: 30px;
             overflow: hidden;
         }
-
         .progress-fill {
             height: 100%;
             background: linear-gradient(90deg, #7bc144 0%, #6ab03a 100%);
             transition: width 0.5s ease;
             width: 12.5%;
         }
-
-        .step {
-            display: none;
-            animation: fadeIn 0.4s ease;
-        }
-
-        .step.active {
-            display: block;
-        }
-
+        .step { display: none; animation: fadeIn 0.4s ease; }
+        .step.active { display: block; }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
         h2 {
             color: #026599;
             font-size: 28px;
             margin-bottom: 10px;
             font-weight: 700;
         }
-
         .subtitle {
             color: #6b7280;
             margin-bottom: 30px;
             font-size: 16px;
             line-height: 1.5;
         }
-
-        .slider-container {
-            margin: 40px 0;
-        }
-
+        .slider-container { margin: 40px 0; }
         .slider-value {
             text-align: center;
             font-size: 36px;
@@ -86,7 +64,6 @@
             color: #026599;
             margin-bottom: 20px;
         }
-
         .slider {
             width: 100%;
             height: 8px;
@@ -95,7 +72,6 @@
             outline: none;
             -webkit-appearance: none;
         }
-
         .slider::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
@@ -107,11 +83,7 @@
             box-shadow: 0 4px 12px rgba(123, 193, 68, 0.4);
             transition: transform 0.2s;
         }
-
-        .slider::-webkit-slider-thumb:hover {
-            transform: scale(1.1);
-        }
-
+        .slider::-webkit-slider-thumb:hover { transform: scale(1.1); }
         .slider::-moz-range-thumb {
             width: 28px;
             height: 28px;
@@ -121,7 +93,6 @@
             border: none;
             box-shadow: 0 4px 12px rgba(123, 193, 68, 0.4);
         }
-
         .slider-labels {
             display: flex;
             justify-content: space-between;
@@ -129,13 +100,11 @@
             font-size: 12px;
             color: #9ca3af;
         }
-
         .options-grid {
             display: grid;
             gap: 12px;
             margin-top: 20px;
         }
-
         .option-card {
             padding: 20px;
             border: 2px solid #e5e7eb;
@@ -147,24 +116,20 @@
             font-weight: 500;
             color: #374151;
         }
-
         .option-card:hover {
             border-color: #7bc144;
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
-
         .option-card.selected {
             border-color: #026599;
             background: #f0f9ff;
             color: #026599;
         }
-
         .input-group {
             margin-bottom: 20px;
             position: relative;
         }
-
         label {
             display: block;
             font-size: 14px;
@@ -172,7 +137,6 @@
             color: #374151;
             margin-bottom: 8px;
         }
-
         input[type="text"],
         input[type="email"],
         input[type="tel"] {
@@ -184,7 +148,6 @@
             transition: all 0.2s;
             font-family: inherit;
         }
-
         input[type="text"]:focus,
         input[type="email"]:focus,
         input[type="tel"]:focus {
@@ -192,18 +155,13 @@
             border-color: #026599;
             box-shadow: 0 0 0 4px rgba(2, 101, 153, 0.1);
         }
-
-        input.error {
-            border-color: #ef4444;
-        }
-
+        input.error { border-color: #ef4444; }
         .error-msg {
             color: #ef4444;
             font-size: 13px;
             margin-top: 6px;
             display: none;
         }
-
         .btn {
             width: 100%;
             padding: 16px 24px;
@@ -216,38 +174,29 @@
             margin-top: 10px;
             font-family: inherit;
         }
-
         .btn-primary {
             background: linear-gradient(135deg, #7bc144 0%, #6ab03a 100%);
             color: white;
             box-shadow: 0 4px 16px rgba(123, 193, 68, 0.3);
         }
-
         .btn-primary:hover:not(:disabled) {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(123, 193, 68, 0.4);
         }
-
         .btn-primary:disabled {
             opacity: 0.6;
             cursor: not-allowed;
         }
-
         .btn-secondary {
             background: #f3f4f6;
             color: #6b7280;
             margin-top: 12px;
         }
-
-        .btn-secondary:hover {
-            background: #e5e7eb;
-        }
-
+        .btn-secondary:hover { background: #e5e7eb; }
         .loader-container {
             text-align: center;
             padding: 60px 20px;
         }
-
         .spinner {
             width: 60px;
             height: 60px;
@@ -257,23 +206,17 @@
             animation: spin 1s linear infinite;
             margin: 0 auto 20px;
         }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
+        @keyframes spin { to { transform: rotate(360deg); } }
         .loader-text {
             color: #026599;
             font-size: 18px;
             font-weight: 600;
         }
-
         .loader-subtext {
             color: #6b7280;
             font-size: 14px;
             margin-top: 8px;
         }
-
         .suggestions {
             position: absolute;
             top: 100%;
@@ -289,7 +232,6 @@
             display: none;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
-
         .suggestion-item {
             padding: 12px 16px;
             cursor: pointer;
@@ -297,11 +239,7 @@
             font-size: 14px;
             text-align: left;
         }
-
-        .suggestion-item:hover {
-            background: #f0f9ff;
-        }
-
+        .suggestion-item:hover { background: #f0f9ff; }
         .trust-badges {
             display: flex;
             justify-content: center;
@@ -310,12 +248,7 @@
             padding-top: 20px;
             border-top: 1px solid #e5e7eb;
         }
-
-        .badge {
-            font-size: 12px;
-            color: #6b7280;
-        }
-
+        .badge { font-size: 12px; color: #6b7280; }
         .loading {
             display: inline-block;
             width: 20px;
@@ -327,11 +260,8 @@
             margin-left: 8px;
             vertical-align: middle;
         }
-
         @media (max-width: 640px) {
-            .form-container {
-                padding: 24px;
-            }
+            .form-container { padding: 24px; }
             h2 { font-size: 24px; }
             .slider-value { font-size: 28px; }
         }
@@ -344,7 +274,6 @@
         <div class="progress-fill" id="progressBar"></div>
     </div>
 
-    <!-- Step 1: Loan Balance -->
     <div class="step active" id="step1">
         <h2>What is your current loan balance?</h2>
         <p class="subtitle">Move the slider to match your remaining mortgage balance</p>
@@ -360,7 +289,6 @@
         <button class="btn btn-primary" onclick="nextStep(2)">Continue →</button>
     </div>
 
-    <!-- Step 2: Income -->
     <div class="step" id="step2">
         <h2>What's Your Household Income?</h2>
         <p class="subtitle">Select your total annual household income before tax</p>
@@ -374,7 +302,6 @@
         <button class="btn btn-secondary" onclick="prevStep(1)">← Back</button>
     </div>
 
-    <!-- Step 3: Employment -->
     <div class="step" id="step3">
         <h2>What's Your Employment Status?</h2>
         <p class="subtitle">Select your current employment situation</p>
@@ -389,7 +316,6 @@
         <button class="btn btn-secondary" onclick="prevStep(2)">← Back</button>
     </div>
 
-    <!-- Step 4: Credit Score -->
     <div class="step" id="step4">
         <h2>What's your credit score?</h2>
         <p class="subtitle">This helps us find the best rates available to you</p>
@@ -403,7 +329,6 @@
         <button class="btn btn-secondary" onclick="prevStep(3)">← Back</button>
     </div>
 
-    <!-- Loader -->
     <div class="step" id="loader">
         <div class="loader-container">
             <div class="spinner"></div>
@@ -412,7 +337,6 @@
         </div>
     </div>
 
-    <!-- Step 5: Address -->
     <div class="step" id="step5">
         <h2>What's your address?</h2>
         <p class="subtitle">Enter your property address details</p>
@@ -430,7 +354,6 @@
         <button class="btn btn-secondary" onclick="prevStep(4)">← Back</button>
     </div>
 
-    <!-- Step 6: Name -->
     <div class="step" id="step6">
         <h2>What's Your Name?</h2>
         <p class="subtitle">Let us know who we're preparing this quote for</p>
@@ -446,7 +369,6 @@
         <button class="btn btn-secondary" onclick="prevStep(5)">← Back</button>
     </div>
 
-    <!-- Step 7: Email -->
     <div class="step" id="step7">
         <h2>What's Your Email Address?</h2>
         <p class="subtitle">We'll send your rate comparison to this address</p>
@@ -458,7 +380,6 @@
         <button class="btn btn-secondary" onclick="prevStep(6)">← Back</button>
     </div>
 
-    <!-- Step 8: Phone -->
     <div class="step" id="step8">
         <h2>Lastly, what's your phone number?</h2>
         <p class="subtitle">Our loan officers will call you about your rates</p>
@@ -474,7 +395,6 @@
         </div>
     </div>
 
-    <!-- Hidden Fields -->
     <input type="hidden" id="utm_source">
     <input type="hidden" id="utm_medium">
     <input type="hidden" id="utm_campaign">
@@ -484,9 +404,6 @@
 </div>
 
 <script>
-// ==========================================
-// GOOGLE SHEETS CONFIGURATION
-// ==========================================
 const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbyddU2StdbY0xJIfYN_YPLmbSKdbHpiOBrhXxXE70K7yKd8jZxA_B9i9t5z-4XHZ9lx/exec';
 const GOOGLE_API_KEY = 'AIzaSyDt1GGYQ5ug-rlEn9qdAk7rbCEKsjLOeiw';
 
@@ -503,29 +420,18 @@ let formData = {
     phone: ''
 };
 
-// UTM Capture - FIXED to get from parent URL
 function captureUTMs() {
-    let pageUrl = '';
+    let pageUrl = document.referrer || window.location.href;
+    console.log('Detected URL:', pageUrl);
+    
     let utmParams = new URLSearchParams();
-    
-    // Try to get URL from parent page (Framer)
     try {
-        if (window.parent !== window) {
-            // We're in an iframe, try to get referrer or parent location
-            pageUrl = document.referrer || window.parent.location.href;
-        } else {
-            pageUrl = window.location.href;
-        }
+        const urlObj = new URL(pageUrl);
+        utmParams = urlObj.searchParams;
     } catch (e) {
-        // If cross-origin error, use referrer or current URL
-        pageUrl = document.referrer || window.location.href;
+        const queryString = pageUrl.split('?')[1];
+        if (queryString) utmParams = new URLSearchParams(queryString);
     }
-    
-    console.log('Page URL detected:', pageUrl);
-    
-    // Extract UTM parameters from the URL
-    const urlObj = new URL(pageUrl);
-    utmParams = urlObj.searchParams;
     
     const fields = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
     fields.forEach(field => {
@@ -538,7 +444,6 @@ function captureUTMs() {
     document.getElementById('page_url').value = pageUrl;
 }
 
-// Slider
 const slider = document.getElementById('loanSlider');
 const sliderValue = document.getElementById('sliderValue');
 slider.addEventListener('input', function() {
@@ -547,7 +452,6 @@ slider.addEventListener('input', function() {
     sliderValue.textContent = value >= 2500000 ? '$2,500,000+' : '$' + value.toLocaleString();
 });
 
-// Navigation
 function updateProgress(step) {
     document.getElementById('progressBar').style.width = ((step / 8) * 100) + '%';
 }
@@ -578,7 +482,6 @@ function selectOption(field, value, next) {
     setTimeout(() => nextStep(next), 200);
 }
 
-// Google Places
 let autocompleteService, placesService, sessionToken;
 
 function initGooglePlaces() {
@@ -593,11 +496,9 @@ function loadGoogleMaps() {
     script.src = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_API_KEY}&libraries=places&callback=initGooglePlaces`;
     script.async = true;
     script.defer = true;
-    script.onerror = () => console.error('Google Maps failed to load');
     document.head.appendChild(script);
 }
 
-// Address autocomplete
 const addressInput = document.getElementById('address');
 const suggestionsDiv = document.getElementById('addressSuggestions');
 
@@ -648,7 +549,6 @@ document.addEventListener('click', function(e) {
     if (!e.target.closest('.input-group')) suggestionsDiv.style.display = 'none';
 });
 
-// Validation
 function validateAddress() {
     const address = document.getElementById('address').value.trim();
     const postcode = document.getElementById('postcode').value.trim();
@@ -712,7 +612,6 @@ function validateEmail() {
     }
 }
 
-// Phone formatting
 document.getElementById('phone').addEventListener('input', function(e) {
     let value = e.target.value.replace(/\s/g, '').replace(/[^0-9]/g, '');
     if (value.length > 4 && value.length <= 7) {
@@ -723,7 +622,6 @@ document.getElementById('phone').addEventListener('input', function(e) {
     e.target.value = value;
 });
 
-// Submit
 function submitForm() {
     const phone = document.getElementById('phone').value.replace(/\s/g, '');
     if (!/^04\d{8}$/.test(phone)) {
@@ -759,29 +657,23 @@ function submitForm() {
         page_url: document.getElementById('page_url').value
     };
     
-    console.log('Submitting data:', data);
-    
     const formBody = Object.keys(data).map(key => 
         encodeURIComponent(key) + '=' + encodeURIComponent(data[key])
     ).join('&');
     
     fetch(GOOGLE_SHEETS_URL, {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: formBody
     })
     .then(() => {
         window.top.location.href = 'https://refinancehub.com.au/thank-you';
     })
-    .catch((error) => {
-        console.error('Error:', error);
+    .catch(() => {
         window.top.location.href = 'https://refinancehub.com.au/thank-you';
     });
 }
 
-// Init
 captureUTMs();
 updateProgress(1);
 loadGoogleMaps();

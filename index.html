@@ -5,7 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RefinanceHub - Check Your Rate</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             background: transparent;
@@ -15,6 +20,7 @@
             justify-content: center;
             padding: 20px;
         }
+
         .form-container {
             background: white;
             border-radius: 20px;
@@ -25,6 +31,7 @@
             position: relative;
             overflow: hidden;
         }
+
         .progress-bar {
             height: 6px;
             background: #e5e7eb;
@@ -32,31 +39,46 @@
             margin-bottom: 30px;
             overflow: hidden;
         }
+
         .progress-fill {
             height: 100%;
             background: linear-gradient(90deg, #7bc144 0%, #6ab03a 100%);
             transition: width 0.5s ease;
             width: 12.5%;
         }
-        .step { display: none; animation: fadeIn 0.4s ease; }
-        .step.active { display: block; }
+
+        .step {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .step.active {
+            display: block;
+        }
+
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
+
         h2 {
             color: #026599;
             font-size: 28px;
             margin-bottom: 10px;
             font-weight: 700;
         }
+
         .subtitle {
             color: #6b7280;
             margin-bottom: 30px;
             font-size: 16px;
             line-height: 1.5;
         }
-        .slider-container { margin: 40px 0; }
+
+        .slider-container {
+            margin: 40px 0;
+        }
+
         .slider-value {
             text-align: center;
             font-size: 36px;
@@ -64,6 +86,7 @@
             color: #026599;
             margin-bottom: 20px;
         }
+
         .slider {
             width: 100%;
             height: 8px;
@@ -72,6 +95,7 @@
             outline: none;
             -webkit-appearance: none;
         }
+
         .slider::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
@@ -83,7 +107,11 @@
             box-shadow: 0 4px 12px rgba(123, 193, 68, 0.4);
             transition: transform 0.2s;
         }
-        .slider::-webkit-slider-thumb:hover { transform: scale(1.1); }
+
+        .slider::-webkit-slider-thumb:hover {
+            transform: scale(1.1);
+        }
+
         .slider::-moz-range-thumb {
             width: 28px;
             height: 28px;
@@ -93,6 +121,7 @@
             border: none;
             box-shadow: 0 4px 12px rgba(123, 193, 68, 0.4);
         }
+
         .slider-labels {
             display: flex;
             justify-content: space-between;
@@ -100,11 +129,13 @@
             font-size: 12px;
             color: #9ca3af;
         }
+
         .options-grid {
             display: grid;
             gap: 12px;
             margin-top: 20px;
         }
+
         .option-card {
             padding: 20px;
             border: 2px solid #e5e7eb;
@@ -116,20 +147,24 @@
             font-weight: 500;
             color: #374151;
         }
+
         .option-card:hover {
             border-color: #7bc144;
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
+
         .option-card.selected {
             border-color: #026599;
             background: #f0f9ff;
             color: #026599;
         }
+
         .input-group {
             margin-bottom: 20px;
             position: relative;
         }
+
         label {
             display: block;
             font-size: 14px;
@@ -137,6 +172,7 @@
             color: #374151;
             margin-bottom: 8px;
         }
+
         input[type="text"],
         input[type="email"],
         input[type="tel"] {
@@ -148,6 +184,7 @@
             transition: all 0.2s;
             font-family: inherit;
         }
+
         input[type="text"]:focus,
         input[type="email"]:focus,
         input[type="tel"]:focus {
@@ -155,13 +192,18 @@
             border-color: #026599;
             box-shadow: 0 0 0 4px rgba(2, 101, 153, 0.1);
         }
-        input.error { border-color: #ef4444; }
+
+        input.error {
+            border-color: #ef4444;
+        }
+
         .error-msg {
             color: #ef4444;
             font-size: 13px;
             margin-top: 6px;
             display: none;
         }
+
         .btn {
             width: 100%;
             padding: 16px 24px;
@@ -174,29 +216,38 @@
             margin-top: 10px;
             font-family: inherit;
         }
+
         .btn-primary {
             background: linear-gradient(135deg, #7bc144 0%, #6ab03a 100%);
             color: white;
             box-shadow: 0 4px 16px rgba(123, 193, 68, 0.3);
         }
+
         .btn-primary:hover:not(:disabled) {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(123, 193, 68, 0.4);
         }
+
         .btn-primary:disabled {
             opacity: 0.6;
             cursor: not-allowed;
         }
+
         .btn-secondary {
             background: #f3f4f6;
             color: #6b7280;
             margin-top: 12px;
         }
-        .btn-secondary:hover { background: #e5e7eb; }
+
+        .btn-secondary:hover {
+            background: #e5e7eb;
+        }
+
         .loader-container {
             text-align: center;
             padding: 60px 20px;
         }
+
         .spinner {
             width: 60px;
             height: 60px;
@@ -206,17 +257,23 @@
             animation: spin 1s linear infinite;
             margin: 0 auto 20px;
         }
-        @keyframes spin { to { transform: rotate(360deg); } }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
         .loader-text {
             color: #026599;
             font-size: 18px;
             font-weight: 600;
         }
+
         .loader-subtext {
             color: #6b7280;
             font-size: 14px;
             margin-top: 8px;
         }
+
         .suggestions {
             position: absolute;
             top: 100%;
@@ -232,6 +289,7 @@
             display: none;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
+
         .suggestion-item {
             padding: 12px 16px;
             cursor: pointer;
@@ -239,7 +297,11 @@
             font-size: 14px;
             text-align: left;
         }
-        .suggestion-item:hover { background: #f0f9ff; }
+
+        .suggestion-item:hover {
+            background: #f0f9ff;
+        }
+
         .trust-badges {
             display: flex;
             justify-content: center;
@@ -248,7 +310,12 @@
             padding-top: 20px;
             border-top: 1px solid #e5e7eb;
         }
-        .badge { font-size: 12px; color: #6b7280; }
+
+        .badge {
+            font-size: 12px;
+            color: #6b7280;
+        }
+
         .loading {
             display: inline-block;
             width: 20px;
@@ -260,8 +327,11 @@
             margin-left: 8px;
             vertical-align: middle;
         }
+
         @media (max-width: 640px) {
-            .form-container { padding: 24px; }
+            .form-container {
+                padding: 24px;
+            }
             h2 { font-size: 24px; }
             .slider-value { font-size: 28px; }
         }
@@ -420,24 +490,17 @@ let formData = {
     phone: ''
 };
 
+// FIXED: Read UTMs from current URL (passed from Framer via iframe src)
 function captureUTMs() {
-    let pageUrl = document.referrer || window.location.href;
-    console.log('Detected URL:', pageUrl);
+    let pageUrl = window.location.href;
+    console.log('Current URL:', pageUrl);
     
-    let utmParams = new URLSearchParams();
-    try {
-        const urlObj = new URL(pageUrl);
-        utmParams = urlObj.searchParams;
-    } catch (e) {
-        const queryString = pageUrl.split('?')[1];
-        if (queryString) utmParams = new URLSearchParams(queryString);
-    }
+    let utmParams = new URLSearchParams(window.location.search);
     
     const fields = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
     fields.forEach(field => {
-        const value = utmParams.get(field) || localStorage.getItem(field) || '';
+        const value = utmParams.get(field) || '';
         document.getElementById(field).value = value;
-        if (value) localStorage.setItem(field, value);
         console.log(field + ':', value);
     });
     

@@ -204,12 +204,6 @@
             display: none;
         }
 
-        .subtext {
-            font-size: 14px;
-            color: #6b7280;
-            margin-top: 6px;
-        }
-
         .btn {
             width: 100%;
             padding: 16px 24px;
@@ -308,10 +302,6 @@
             background: #f0f9ff;
         }
 
-        .suggestion-item:last-child {
-            border-bottom: none;
-        }
-
         .trust-badges {
             display: flex;
             justify-content: center;
@@ -322,9 +312,6 @@
         }
 
         .badge {
-            display: flex;
-            align-items: center;
-            gap: 6px;
             font-size: 12px;
             color: #6b7280;
         }
@@ -344,16 +331,9 @@
         @media (max-width: 640px) {
             .form-container {
                 padding: 24px;
-                border-radius: 16px;
             }
-
-            h2 {
-                font-size: 24px;
-            }
-
-            .slider-value {
-                font-size: 28px;
-            }
+            h2 { font-size: 24px; }
+            .slider-value { font-size: 28px; }
         }
     </style>
 </head>
@@ -364,11 +344,10 @@
         <div class="progress-fill" id="progressBar"></div>
     </div>
 
-    <!-- Step 1: Loan Balance Slider -->
+    <!-- Step 1: Loan Balance -->
     <div class="step active" id="step1">
         <h2>What is your current loan balance?</h2>
         <p class="subtitle">Move the slider to match your remaining mortgage balance</p>
-        
         <div class="slider-container">
             <div class="slider-value" id="sliderValue">$100,000</div>
             <input type="range" min="0" max="2500000" value="100000" step="10000" class="slider" id="loanSlider">
@@ -378,15 +357,13 @@
                 <span>$2.5M+</span>
             </div>
         </div>
-        
         <button class="btn btn-primary" onclick="nextStep(2)">Continue →</button>
     </div>
 
-    <!-- Step 2: Household Income -->
+    <!-- Step 2: Income -->
     <div class="step" id="step2">
         <h2>What's Your Household Income?</h2>
         <p class="subtitle">Select your total annual household income before tax</p>
-        
         <div class="options-grid">
             <div class="option-card" onclick="selectOption('income', '$50k - $150k', 3)">$50k - $150k</div>
             <div class="option-card" onclick="selectOption('income', '$150k - $250k', 3)">$150k - $250k</div>
@@ -394,15 +371,13 @@
             <div class="option-card" onclick="selectOption('income', '$500k - $1M', 3)">$500k - $1M</div>
             <div class="option-card" onclick="selectOption('income', '$1M+', 3)">$1M+</div>
         </div>
-        
         <button class="btn btn-secondary" onclick="prevStep(1)">← Back</button>
     </div>
 
-    <!-- Step 3: Employment Status -->
+    <!-- Step 3: Employment -->
     <div class="step" id="step3">
         <h2>What's Your Employment Status?</h2>
         <p class="subtitle">Select your current employment situation</p>
-        
         <div class="options-grid">
             <div class="option-card" onclick="selectOption('employment', 'Full time', 4)">Full time</div>
             <div class="option-card" onclick="selectOption('employment', 'Part time', 4)">Part time</div>
@@ -411,7 +386,6 @@
             <div class="option-card" onclick="selectOption('employment', 'Retired', 4)">Retired</div>
             <div class="option-card" onclick="selectOption('employment', 'Unemployed', 4)">Unemployed</div>
         </div>
-        
         <button class="btn btn-secondary" onclick="prevStep(2)">← Back</button>
     </div>
 
@@ -419,7 +393,6 @@
     <div class="step" id="step4">
         <h2>What's your credit score?</h2>
         <p class="subtitle">This helps us find the best rates available to you</p>
-        
         <div class="options-grid">
             <div class="option-card" onclick="selectOption('credit', 'Excellent', 'loader')">Excellent (800+)</div>
             <div class="option-card" onclick="selectOption('credit', 'Good', 'loader')">Good (700-799)</div>
@@ -427,11 +400,10 @@
             <div class="option-card" onclick="selectOption('credit', 'Below Average', 'loader')">Below Average (500-599)</div>
             <div class="option-card" onclick="selectOption('credit', 'Bad', 'loader')">Bad (Below 500)</div>
         </div>
-        
         <button class="btn btn-secondary" onclick="prevStep(3)">← Back</button>
     </div>
 
-    <!-- Loader Step -->
+    <!-- Loader -->
     <div class="step" id="loader">
         <div class="loader-container">
             <div class="spinner"></div>
@@ -444,19 +416,16 @@
     <div class="step" id="step5">
         <h2>What's your address?</h2>
         <p class="subtitle">Enter your property address details</p>
-        
         <div class="input-group">
             <label>Street Address</label>
             <input type="text" id="address" placeholder="Start typing your address..." autocomplete="off">
             <div class="suggestions" id="addressSuggestions"></div>
         </div>
-        
         <div class="input-group">
             <label>Postcode</label>
             <input type="text" id="postcode" placeholder="e.g. 2000" maxlength="4">
             <span class="error-msg" id="postcodeError">Please enter a valid 4-digit postcode</span>
         </div>
-        
         <button class="btn btn-primary" onclick="validateAddress()">Continue →</button>
         <button class="btn btn-secondary" onclick="prevStep(4)">← Back</button>
     </div>
@@ -465,17 +434,14 @@
     <div class="step" id="step6">
         <h2>What's Your Name?</h2>
         <p class="subtitle">Let us know who we're preparing this quote for</p>
-        
         <div class="input-group">
             <label>First Name</label>
             <input type="text" id="firstName" placeholder="John">
         </div>
-        
         <div class="input-group">
             <label>Last Name</label>
             <input type="text" id="lastName" placeholder="Smith">
         </div>
-        
         <button class="btn btn-primary" onclick="validateName()">Continue →</button>
         <button class="btn btn-secondary" onclick="prevStep(5)">← Back</button>
     </div>
@@ -484,12 +450,10 @@
     <div class="step" id="step7">
         <h2>What's Your Email Address?</h2>
         <p class="subtitle">We'll send your rate comparison to this address</p>
-        
         <div class="input-group">
             <input type="email" id="email" placeholder="john.smith@email.com">
             <span class="error-msg" id="emailError">Please enter a valid email address</span>
         </div>
-        
         <button class="btn btn-primary" onclick="validateEmail()">Continue →</button>
         <button class="btn btn-secondary" onclick="prevStep(6)">← Back</button>
     </div>
@@ -498,22 +462,19 @@
     <div class="step" id="step8">
         <h2>Lastly, what's your phone number?</h2>
         <p class="subtitle">Our loan officers will call you about your rates</p>
-        
         <div class="input-group">
             <input type="tel" id="phone" placeholder="04XX XXX XXX" maxlength="12">
             <span class="error-msg" id="phoneError">Please enter a valid Australian mobile number</span>
         </div>
-        
         <button class="btn btn-primary" onclick="submitForm()" id="submitBtn">Get My Rates →</button>
         <button class="btn btn-secondary" onclick="prevStep(7)">← Back</button>
-        
         <div class="trust-badges">
             <div class="badge">🔒 SSL Secure</div>
             <div class="badge">✓ No Obligation</div>
         </div>
     </div>
 
-    <!-- Hidden UTM Fields -->
+    <!-- Hidden Fields -->
     <input type="hidden" id="utm_source">
     <input type="hidden" id="utm_medium">
     <input type="hidden" id="utm_campaign">
@@ -526,10 +487,9 @@
 // ==========================================
 // GOOGLE SHEETS CONFIGURATION
 // ==========================================
-const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbyx7JcegxgNRvcZygtLqz6367j-lUGt4sjGpH7lST7imhVSjfjXTrzDvx7qefqSpzOt/exec';
+const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbyddU2StdbY0xJIfYN_YPLmbSKdbHpiOBrhXxXE70K7yKd8jZxA_B9i9t5z-4XHZ9lx/exec';
 const GOOGLE_API_KEY = 'AIzaSyDt1GGYQ5ug-rlEn9qdAk7rbCEKsjLOeiw';
 
-// Form Data Storage
 let formData = {
     loanBalance: 100000,
     income: '',
@@ -547,46 +507,34 @@ let formData = {
 function captureUTMs() {
     const params = new URLSearchParams(window.location.search);
     const fields = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
-    
     fields.forEach(field => {
         const value = params.get(field) || localStorage.getItem(field) || '';
         document.getElementById(field).value = value;
         if (value) localStorage.setItem(field, value);
     });
-    
     document.getElementById('page_url').value = window.location.href;
 }
 
-// Slider Logic
+// Slider
 const slider = document.getElementById('loanSlider');
 const sliderValue = document.getElementById('sliderValue');
-
 slider.addEventListener('input', function() {
     let value = parseInt(this.value);
     formData.loanBalance = value;
-    
-    if (value >= 2500000) {
-        sliderValue.textContent = '$2,500,000+';
-    } else {
-        sliderValue.textContent = '$' + value.toLocaleString();
-    }
+    sliderValue.textContent = value >= 2500000 ? '$2,500,000+' : '$' + value.toLocaleString();
 });
 
 // Navigation
 function updateProgress(step) {
-    const percentage = (step / 8) * 100;
-    document.getElementById('progressBar').style.width = percentage + '%';
+    document.getElementById('progressBar').style.width = ((step / 8) * 100) + '%';
 }
 
 function nextStep(step) {
     document.querySelector('.step.active').classList.remove('active');
-    
     if (step === 'loader') {
         document.getElementById('loader').classList.add('active');
         updateProgress(4.5);
-        setTimeout(() => {
-            nextStep(5);
-        }, 2000);
+        setTimeout(() => nextStep(5), 2000);
     } else {
         document.getElementById('step' + step).classList.add('active');
         updateProgress(step);
@@ -599,60 +547,41 @@ function prevStep(step) {
     updateProgress(step);
 }
 
-// Option Selection
 function selectOption(field, value, next) {
     formData[field] = value;
-    
     const cards = document.querySelectorAll(`#step${next === 'loader' ? 4 : next - 1} .option-card`);
     cards.forEach(card => card.classList.remove('selected'));
     event.target.classList.add('selected');
-    
-    setTimeout(() => {
-        nextStep(next);
-    }, 200);
+    setTimeout(() => nextStep(next), 200);
 }
 
-// Google Places Autocomplete
-let autocompleteService;
-let placesService;
-let sessionToken;
+// Google Places
+let autocompleteService, placesService, sessionToken;
 
 function initGooglePlaces() {
-    if (typeof google === 'undefined') {
-        console.log('Google Maps not loaded yet');
-        return;
-    }
+    if (typeof google === 'undefined') return;
     autocompleteService = new google.maps.places.AutocompleteService();
     placesService = new google.maps.places.PlacesService(document.createElement('div'));
     sessionToken = new google.maps.places.AutocompleteSessionToken();
 }
 
-// Load Google Maps Script
 function loadGoogleMaps() {
     const script = document.createElement('script');
     script.src = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_API_KEY}&libraries=places&callback=initGooglePlaces`;
     script.async = true;
     script.defer = true;
-    script.onerror = function() {
-        console.error('Google Maps failed to load');
-    };
+    script.onerror = () => console.error('Google Maps failed to load');
     document.head.appendChild(script);
 }
 
-// Address input handling
+// Address autocomplete
 const addressInput = document.getElementById('address');
 const suggestionsDiv = document.getElementById('addressSuggestions');
 
 addressInput.addEventListener('input', function() {
     const value = this.value;
-    
-    if (value.length < 3) {
+    if (value.length < 3 || !autocompleteService) {
         suggestionsDiv.style.display = 'none';
-        return;
-    }
-    
-    if (!autocompleteService) {
-        console.log('Autocomplete service not ready');
         return;
     }
     
@@ -665,18 +594,14 @@ addressInput.addEventListener('input', function() {
             suggestionsDiv.style.display = 'none';
             return;
         }
-        
         suggestionsDiv.innerHTML = '';
         predictions.forEach(function(prediction) {
             const div = document.createElement('div');
             div.className = 'suggestion-item';
             div.textContent = prediction.description;
-            div.onclick = function() {
-                selectAddress(prediction);
-            };
+            div.onclick = () => selectAddress(prediction);
             suggestionsDiv.appendChild(div);
         });
-        
         suggestionsDiv.style.display = 'block';
     });
 });
@@ -684,35 +609,26 @@ addressInput.addEventListener('input', function() {
 function selectAddress(prediction) {
     addressInput.value = prediction.description;
     suggestionsDiv.style.display = 'none';
-    
     placesService.getDetails({
         placeId: prediction.place_id,
         sessionToken: sessionToken
     }, function(place, status) {
         if (status === google.maps.places.PlacesServiceStatus.OK && place.address_components) {
-            const postcodeComponent = place.address_components.find(
-                component => component.types.includes('postal_code')
-            );
-            if (postcodeComponent) {
-                document.getElementById('postcode').value = postcodeComponent.long_name;
-            }
+            const postcode = place.address_components.find(c => c.types.includes('postal_code'));
+            if (postcode) document.getElementById('postcode').value = postcode.long_name;
         }
         sessionToken = new google.maps.places.AutocompleteSessionToken();
     });
 }
 
-// Close suggestions when clicking outside
 document.addEventListener('click', function(e) {
-    if (!e.target.closest('.input-group')) {
-        suggestionsDiv.style.display = 'none';
-    }
+    if (!e.target.closest('.input-group')) suggestionsDiv.style.display = 'none';
 });
 
-// Validation Functions
+// Validation
 function validateAddress() {
     const address = document.getElementById('address').value.trim();
     const postcode = document.getElementById('postcode').value.trim();
-    
     let valid = true;
     
     if (address.length < 5) {
@@ -723,8 +639,7 @@ function validateAddress() {
         formData.address = address;
     }
     
-    const postcodeRegex = /^\d{4}$/;
-    if (!postcodeRegex.test(postcode)) {
+    if (!/^\d{4}$/.test(postcode)) {
         document.getElementById('postcode').classList.add('error');
         document.getElementById('postcodeError').style.display = 'block';
         valid = false;
@@ -740,7 +655,6 @@ function validateAddress() {
 function validateName() {
     const firstName = document.getElementById('firstName').value.trim();
     const lastName = document.getElementById('lastName').value.trim();
-    
     let valid = true;
     
     if (firstName.length < 2) {
@@ -764,9 +678,7 @@ function validateName() {
 
 function validateEmail() {
     const email = document.getElementById('email').value.trim();
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    
-    if (!emailRegex.test(email)) {
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
         document.getElementById('email').classList.add('error');
         document.getElementById('emailError').style.display = 'block';
     } else {
@@ -788,11 +700,10 @@ document.getElementById('phone').addEventListener('input', function(e) {
     e.target.value = value;
 });
 
+// Submit
 function submitForm() {
     const phone = document.getElementById('phone').value.replace(/\s/g, '');
-    const phoneRegex = /^04\d{8}$/;
-    
-    if (!phoneRegex.test(phone)) {
+    if (!/^04\d{8}$/.test(phone)) {
         document.getElementById('phone').classList.add('error');
         document.getElementById('phoneError').style.display = 'block';
         return;
@@ -806,16 +717,7 @@ function submitForm() {
     btn.disabled = true;
     btn.innerHTML = 'Submitting<span class="loading"></span>';
     
-    const utmData = {
-        utm_source: document.getElementById('utm_source').value,
-        utm_medium: document.getElementById('utm_medium').value,
-        utm_campaign: document.getElementById('utm_campaign').value,
-        utm_content: document.getElementById('utm_content').value,
-        utm_term: document.getElementById('utm_term').value,
-        page_url: document.getElementById('page_url').value
-    };
-    
-    const submissionData = {
+    const data = {
         loanBalance: formData.loanBalance >= 2500000 ? '$2,500,000+' : '$' + formData.loanBalance.toLocaleString(),
         income: formData.income,
         employment: formData.employment,
@@ -826,40 +728,44 @@ function submitForm() {
         lastName: formData.lastName,
         email: formData.email,
         phone: formData.phone,
-        ...utmData
+        utm_source: document.getElementById('utm_source').value,
+        utm_medium: document.getElementById('utm_medium').value,
+        utm_campaign: document.getElementById('utm_campaign').value,
+        utm_content: document.getElementById('utm_content').value,
+        utm_term: document.getElementById('utm_term').value,
+        page_url: document.getElementById('page_url').value
     };
     
-    console.log('Submitting to Google Sheets:', submissionData);
-    sendToGoogleSheets(submissionData);
-}
-
-function sendToGoogleSheets(data) {
-    // Create form data
-    const formData = new URLSearchParams();
-    for (const [key, value] of Object.entries(data)) {
-        formData.append(key, value);
-    }
+    // Send as form data
+    const formBody = Object.keys(data).map(key => 
+        encodeURIComponent(key) + '=' + encodeURIComponent(data[key])
+    ).join('&');
+    
+    console.log('Sending to:', GOOGLE_SHEETS_URL);
+    console.log('Data:', formBody);
     
     fetch(GOOGLE_SHEETS_URL, {
         method: 'POST',
-        mode: 'no-cors',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
         },
-        body: formData.toString()
+        body: formBody
     })
-    .then(() => {
-        console.log('Form submitted successfully');
+    .then(response => {
+        console.log('Response status:', response.status);
+        return response.text();
+    })
+    .then(result => {
+        console.log('Success:', result);
         window.top.location.href = 'https://refinancehub.com.au/thank-you';
     })
-    .catch((error) => {
+    .catch(error => {
         console.error('Error:', error);
-        // Still redirect even on error
         window.top.location.href = 'https://refinancehub.com.au/thank-you';
     });
 }
 
-// Initialize
+// Init
 captureUTMs();
 updateProgress(1);
 loadGoogleMaps();
